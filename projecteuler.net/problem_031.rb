@@ -9,19 +9,22 @@
 # 1×£1 + 1×50p + 2×20p + 1×5p + 1×2p + 3×1p
 # How many different ways can £2 be made using any number of coins?
 
+#
+# Find coin combinations that are equal to amount
+#
 def find_coin_combinations(amount, coins)
   combinations = []
   first, *rest = coins
   max_qty = amount / first
 
   (0..max_qty).each do |qty|
-    choice = [first, qty, first * qty].freeze
+    first_total = first * qty
 
     if rest.empty?
-      combinations << [choice] if choice[2] == amount
+      combinations << [first] if first_total == amount
     else
-      find_coin_combinations(amount - choice[2], rest).each do |sub|
-        combinations << [choice, *sub]
+      find_coin_combinations(amount - first_total, rest).each do |sub|
+        combinations << [first, *sub]
       end
     end
   end
