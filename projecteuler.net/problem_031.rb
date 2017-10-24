@@ -19,14 +19,18 @@ def find_coin_combinations(amount, coins)
 
   (0..max_qty).each do |qty|
     first_total = first * qty
-
-    if rest.empty?
-      combinations << [first] if first_total == amount
-    else
+    if (amount - first_total).zero?
+      combinations << [first]
+    elsif !rest.empty?
+      # sub must add up to sub_amount.
+      # there is none. It will return [].
       find_coin_combinations(amount - first_total, rest).each do |sub|
         combinations << [first, *sub]
       end
     end
+    # Otherwise
+    # sub_amount is not zero and there is no rest.
+    # There is no solution. Try next.
   end
 
   combinations
