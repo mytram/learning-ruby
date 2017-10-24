@@ -18,16 +18,19 @@ def solve(problem)
 
   max = 1
   number = 2
+  size = primes.size
 
-  (0..primes.size).each do |start|
+  (0..size).each do |start|
     sum = 0
-    (start...primes.size).each do |j|
+    n = 0
+    (start...size).each do |j|
+      n += 1
       sum += primes[j]
 
       break if sum > primes.last
+      next if n < max
 
-      n = j - start + 1
-      if n > max && sum.prime?
+      if sum.prime?
         number = sum
         max = n
       end
