@@ -27,7 +27,7 @@ def solve(problem)
       break if sum > primes.last
 
       n = j - start + 1
-      if sum.prime? && n > max
+      if n > max && sum.prime?
         number = sum
         max = n
       end
