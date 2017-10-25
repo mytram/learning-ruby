@@ -6,16 +6,17 @@
 # Find the smallest positive integer, x, such that 2x, 3x, 4x, 5x, and
 # 6x, contain the same digits.
 
-require 'set'
+def permuted_multiples(start, times)
+  loop do
+    results = times.map { |t| (start * t).to_s.chars.sort.join }
+    return start if results.all? { |r| r == results[0] }
+    start += 1
+  end
+end
 
 def solve
   n = 125_874
-  times = [2, 3, 4, 5, 6]
-  loop do
-    results = times.map { |t| (n * t).to_s.chars.sort.join }
-    return n if results.all? { |r| r == results[0] }
-    n += 1
-  end
+  permuted_multiples(n, 2..6)
 end
 
 puts "#{__FILE__} #{solve}"
