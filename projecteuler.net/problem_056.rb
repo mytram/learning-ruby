@@ -9,10 +9,8 @@
 # the maximum digital sum?
 
 def solve
-  (1..99).map do |a|
-    (1..99).map do |b|
-      (a ** b).to_s.chars.map(&:to_i).reduce(&:+)
-    end.max
+  (1..100).to_a.combination(2).map do |a, b|
+    (a ** b).to_s.chars.map(&:to_i).reduce(&:+)
   end.max
 end
 
